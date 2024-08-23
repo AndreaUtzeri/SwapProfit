@@ -9,7 +9,8 @@ lifecycleRuntimeKtx = "2.8.4"
 activityCompose = "1.9.1"
 composeBom = "2024.04.01"
 room = "2.5.1" # Aggiungi la versione di Room
-lifecycleViewmodelKtx = "2.8.4" # Aggiorna anche la versione di Lifecycle ViewModel
+lifecycleViewmodelKtx = "2.8.4"
+recyclerview = "1.3.2" # Aggiorna anche la versione di Lifecycle ViewModel
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,6 +35,7 @@ androidx-room-compiler = { group = "androidx.room", name = "room-compiler", vers
 # Aggiungi ViewModel e LiveData
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleViewmodelKtx" }
+androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

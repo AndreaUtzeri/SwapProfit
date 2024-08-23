@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.swapprofit.databinding.ActivitySalesBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,6 +22,8 @@ class SalesActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         database = AppDatabase.getDatabase(this)
+
+        setupRecyclerView() //Per il funzionamento della visualizzazione della lista
 
         binding.btnSaveSale.setOnClickListener {
             val item = binding.etSaleItem.text.toString()
@@ -47,6 +50,16 @@ class SalesActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val sales = database.saleDao().getAll()
             Log.d("SalesActivity", "Saved Sales: ${sales.map { it.price }}")
+        }
+    }
+
+    private fun setupRecyclerView() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val salesList = database.saleDao().getAll()
+            withContext(Dispatchers.Main) {
+                binding.rvSalesList.layoutManager = LinearLayoutManager(this@SalesActivity)
+                binding.rvSalesList.adapter = SaleItemAdapter(salesList)
+            }
         }
     }
 }

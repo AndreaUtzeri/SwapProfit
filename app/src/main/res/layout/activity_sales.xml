@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <EditText
         android:id="@+id/etSaleItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Item Name"
-        android:layout_margin="16dp"/>
+        android:hint="Enter item"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/etSalePrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Price"
-        android:inputType="numberDecimal"
-        android:layout_margin="16dp"
-        android:layout_below="@id/etSaleItem"/>
+        android:hint="Enter price"
+        android:minHeight="48dp" />
 
     <Button
         android:id="@+id/btnSaveSale"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save Sale"
-        android:layout_margin="16dp"
-        android:layout_below="@id/etSalePrice"/>
-</RelativeLayout>
+        android:text="Save Sale" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSalesList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="16dp" />
+
+</LinearLayout>
