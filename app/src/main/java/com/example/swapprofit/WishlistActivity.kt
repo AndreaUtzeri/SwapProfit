@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.swapprofit.databinding.ActivityWishlistBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,6 +22,8 @@ class WishlistActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         database = AppDatabase.getDatabase(this)
+
+        setupRecyclerView()
 
         binding.btnSaveWishlist.setOnClickListener {
             val item = binding.etWishlistItem.text.toString()
@@ -47,6 +50,16 @@ class WishlistActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val wishlistItems = database.wishlistDao().getAll()
             Log.d("WishlistActivity", "Saved Wishlist Items: ${wishlistItems.map { "${it.item}: €${it.price}, Link: ${it.link}" }}")
+        }
+    }
+
+    private fun setupRecyclerView() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val wishlist = database.wishlistDao().getAll()
+            withContext(Dispatchers.Main) {
+                binding.rvWishlistList.layoutManager = LinearLayoutManager(this@WishlistActivity)
+                binding.rvWishlistList.adapter = WishlistItemAdapter(wishlist)
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.swapprofit.databinding.ActivityPurchasesBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,6 +22,8 @@ class PurchasesActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         database = AppDatabase.getDatabase(this)
+
+        setupRecyclerView()
 
         binding.btnSavePurchase.setOnClickListener {
             val item = binding.etPurchaseItem.text.toString()
@@ -46,6 +49,16 @@ class PurchasesActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val purchases = database.purchaseDao().getAll()
             Log.d("PurchasesActivity", "Saved Purchases: ${purchases.map { it.price }}")
+        }
+    }
+
+    private fun setupRecyclerView() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val purchasesList = database.purchaseDao().getAll()
+            withContext(Dispatchers.Main) {
+                binding.rvPurchasesList.layoutManager = LinearLayoutManager(this@PurchasesActivity)
+                binding.rvPurchasesList.adapter = PurchaseItemAdapter(purchasesList)
+            }
         }
     }
 }

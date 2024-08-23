@@ -1,37 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <EditText
         android:id="@+id/etWishlistItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Item Name"
-        android:layout_margin="16dp"/>
+        android:hint="Enter item"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/etWishlistPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Price"
-        android:inputType="numberDecimal"
-        android:layout_margin="16dp"
-        android:layout_below="@id/etWishlistItem"/>
+        android:hint="Enter price"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/etWishlistLink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Product Link"
-        android:layout_margin="16dp"
-        android:layout_below="@id/etWishlistPrice"/>
+        android:hint="Enter link"
+        android:minHeight="48dp" />
 
     <Button
         android:id="@+id/btnSaveWishlist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save Wishlist Item"
-        android:layout_margin="16dp"
-        android:layout_below="@id/etWishlistLink"/>
-</RelativeLayout>
+        android:text="Save Wishlist Item" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvWishlistList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="16dp" />
+
+</LinearLayout>
