@@ -56,8 +56,11 @@ android {
         }
     }
 }
-
+val roomVersion = "2.6.1"
 dependencies {
+
+
+
     implementation("androidx.appcompat:appcompat:1.6.1")  //appcompat
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -76,8 +79,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation("androidx.room:room-runtime:2.5.2")
-    kapt("androidx.room:room-compiler:2.5.2")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    implementation("androidx.room:room-runtime:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
@@ -85,6 +89,7 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.6.10")
 
 
 

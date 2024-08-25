@@ -3,6 +3,8 @@ package com.example.swapprofit
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
+import androidx.room.Delete
 
 @Dao
 interface SaleDao {
@@ -11,4 +13,10 @@ interface SaleDao {
 
     @Query("SELECT * FROM sales")
     fun getAll(): List<Sale>
+
+    @Update
+    suspend fun update(sale: Sale)
+
+    @Delete
+    suspend fun delete(sale: Sale): Int  // per dare un tipo di ritorno
 }
