@@ -1,7 +1,10 @@
 package com.example.swapprofit
 
+import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,7 +36,7 @@ class PurchasesActivity : AppCompatActivity() {
                 CoroutineScope(Dispatchers.IO).launch {
                     val purchase = Purchase(item = item, price = price)
                     database.purchaseDao().insert(purchase)
-
+                    setupRecyclerView()
                     // Log dei dati salvati
                     logSavedData()
                 }
@@ -57,7 +60,44 @@ class PurchasesActivity : AppCompatActivity() {
             val purchasesList = database.purchaseDao().getAll()
             withContext(Dispatchers.Main) {
                 binding.rvPurchasesList.layoutManager = LinearLayoutManager(this@PurchasesActivity)
-                binding.rvPurchasesList.adapter = PurchaseItemAdapter(purchasesList)
+                binding.rvPurchasesList.adapter = PurchaseItemAdapter(purchasesList, ::editPurchase, ::deletePurchase)
+            }
+        }
+    }
+    private fun editPurchase(purchase: Purchase) {
+        val builder = AlertDialog.Builder(this)
+        val dialogView = layoutInflater.inflate(R.layout.dialog_edit_purchase, null)
+        builder.setView(dialogView)
+        val dialog = builder.create()
+
+        val etItemName = dialogView.findViewById<EditText>(R.id.etItemName)
+        val etItemPrice = dialogView.findViewById<EditText>(R.id.etItemPrice)
+
+        etItemName.setText(purchase.item)
+        etItemPrice.setText(purchase.price.toString())
+
+        dialogView.findViewById<Button>(R.id.btnUpdate).setOnClickListener {
+            val newItem = etItemName.text.toString()
+            val newPrice = etItemPrice.text.toString().toDoubleOrNull()
+
+            if (newItem.isNotBlank() && newPrice != null) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    database.purchaseDao().update(Purchase(purchase.id, newItem, newPrice))
+                    withContext(Dispatchers.Main) {
+                        setupRecyclerView()
+                        dialog.dismiss()
+                    }
+                }
+            }
+        }
+
+        dialog.show()
+    }
+    private fun deletePurchase(purchase: Purchase) {
+        CoroutineScope(Dispatchers.IO).launch {
+            database.purchaseDao().delete(purchase)
+            withContext(Dispatchers.Main) {
+                setupRecyclerView()
             }
         }
     }

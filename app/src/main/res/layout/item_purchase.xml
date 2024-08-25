@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:padding="8dp">
 
@@ -18,5 +19,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="€0.00"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:layout_marginStart="8dp" />
+
+    <ImageButton
+        android:id="@+id/btnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Edit"
+        android:src="@android:drawable/ic_menu_edit"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="4dp"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <ImageButton
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Delete"
+        android:src="@android:drawable/ic_menu_delete"
+        android:layout_marginStart="4dp"
+        tools:ignore="TouchTargetSizeCheck" />
 </LinearLayout>

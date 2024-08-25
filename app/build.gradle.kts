@@ -60,7 +60,7 @@ val roomVersion = "2.6.1"
 dependencies {
 
 
-
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.appcompat:appcompat:1.6.1")  //appcompat
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
