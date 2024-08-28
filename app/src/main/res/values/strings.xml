@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SwapProfit</string>
+    <string-array name="sort_options">
+        <item>Ordina per Data (Recenti)</item>
+        <item>Ordina per Prezzo (Crescente)</item>
+        <item>Ordina per Prezzo (Decrescente)</item>
+    </string-array>
 </resources>

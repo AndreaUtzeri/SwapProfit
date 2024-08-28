@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class Purchase(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val item: String,
-    val price: Double
+    val price: Double,
+    val dateAdded: Long = System.currentTimeMillis()
 )

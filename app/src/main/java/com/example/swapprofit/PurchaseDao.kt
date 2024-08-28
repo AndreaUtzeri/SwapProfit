@@ -19,4 +19,13 @@ interface PurchaseDao {
 
     @Delete
     suspend fun delete(purchase: Purchase)
+
+    @Query("SELECT * FROM purchases ORDER BY dateAdded DESC")
+    fun getAllByDate(): List<Purchase>
+
+    @Query("SELECT * FROM purchases ORDER BY price ASC")
+    fun getAllByPriceAscending(): List<Purchase>
+
+    @Query("SELECT * FROM purchases ORDER BY price DESC")
+    fun getAllByPriceDescending(): List<Purchase>
 }

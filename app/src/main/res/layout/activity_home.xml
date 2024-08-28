@@ -7,7 +7,7 @@
         android:id="@+id/tvCounter1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Counter1: €0"
+        android:text="Profit: €0"
         android:textSize="24sp"
         android:layout_margin="16dp"
         android:layout_alignParentTop="true"/>
@@ -16,7 +16,7 @@
         android:id="@+id/tvCounter2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Counter2: €0"
+        android:text="Future Profit: €0"
         android:textSize="24sp"
         android:layout_margin="16dp"
         android:layout_below="@id/tvCounter1"/>

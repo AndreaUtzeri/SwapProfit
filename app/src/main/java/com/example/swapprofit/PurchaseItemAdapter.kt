@@ -32,9 +32,9 @@ class PurchaseItemAdapter(
     }
 
     class PurchaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val itemName: TextView = view.findViewById(R.id.tvItemName)
-        val itemPrice: TextView = view.findViewById(R.id.tvItemPrice)
-        val btnEdit: ImageButton = view.findViewById(R.id.btnEdit)
-        val btnDelete: ImageButton = view.findViewById(R.id.btnDelete)
+        val itemName: TextView = view.findViewById(R.id.tvItemName)//?: throw NullPointerException("TextView with ID 'tvItemName' not found")
+        val itemPrice: TextView = view.findViewById(R.id.tvItemPrice)//  ?: throw NullPointerException("TextView with ID 'tvItemPrice' not found")
+        val btnEdit: ImageButton = view.findViewById(R.id.btnEdit)//?: throw NullPointerException("ImageButton with ID 'btnEdit' not found")
+        val btnDelete: ImageButton = view.findViewById(R.id.btnDelete)// ?: throw NullPointerException("ImageButton with ID 'btnDelete' not found")
     }
 }
