@@ -1,5 +1,6 @@
 package com.example.swapprofit
 
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,8 @@ class WishlistItemAdapter(
         holder.itemName.text = item.item
         holder.itemPrice.text = "€${item.price}"
         holder.itemLink.text = item.link
+
+        holder.itemLink.movementMethod = LinkMovementMethod.getInstance()
 
         holder.btnEdit.setOnClickListener { onEdit(item) }
         holder.btnDelete.setOnClickListener { onDelete(item) }
