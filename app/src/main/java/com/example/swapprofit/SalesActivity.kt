@@ -1,8 +1,12 @@
 package com.example.swapprofit
 
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +29,8 @@ class SalesActivity : AppCompatActivity() {
 
         database = AppDatabase.getDatabase(this)
 
+        setupSpinner()
+
         setupRecyclerView() //Per il funzionamento della visualizzazione della lista
 
         binding.btnSaveSale.setOnClickListener {
@@ -46,9 +52,34 @@ class SalesActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupRecyclerView() {
+    private fun setupSpinner() {
+        val spinner: Spinner = binding.spinnerSortOptions
+        val sortOptions = arrayOf("Sort by Date (Newest)", "Sort by Date (Oldest)", "Sort by Price (Low to High)", "Sort by Price (High to Low)")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, sortOptions)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+
+        // Per impostare il listener in modo esplicito con AdapterView.OnItemSelectedListener
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+
+                setupRecyclerView(sortOption = position)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Non fare nulla se nessuna opzione è selezionata
+            }
+        }
+    }
+
+    private fun setupRecyclerView(sortOption: Int = 0) {
         CoroutineScope(Dispatchers.IO).launch {
-            val salesList = database.saleDao().getAll()
+            val salesList = when (sortOption) {
+                1 -> database.saleDao().getAll().sortedBy { it.id }  // Sort by Date (Oldest)
+                2 -> database.saleDao().getAll().sortedBy { it.price }  // Sort by Price (Low to High)
+                3 -> database.saleDao().getAll().sortedByDescending { it.price }  // Sort by Price (High to Low)
+                else -> database.saleDao().getAll().sortedByDescending { it.id }  // Sort by Date (Newest)
+            }
             withContext(Dispatchers.Main) {
                 binding.rvSalesList.layoutManager = LinearLayoutManager(this@SalesActivity)
                 binding.rvSalesList.adapter = SaleItemAdapter(salesList, ::editSale, ::deleteSale)

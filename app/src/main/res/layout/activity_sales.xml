@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -32,5 +33,12 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:paddingTop="16dp" />
+
+    <Spinner
+        android:id="@+id/spinnerSortOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/sort_options"
+        tools:ignore="TouchTargetSizeCheck" />
 
 </LinearLayout>

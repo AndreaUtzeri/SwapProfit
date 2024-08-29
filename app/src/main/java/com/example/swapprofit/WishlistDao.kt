@@ -19,4 +19,13 @@ interface WishlistDao {
 
     @Delete
     suspend fun delete(wishlistItem: WishlistItem)
+
+    @Query("SELECT * FROM purchases ORDER BY dateAdded DESC")
+    fun getAllByDate(): List<Purchase>
+
+    @Query("SELECT * FROM purchases ORDER BY price ASC")
+    fun getAllByPriceAscending(): List<Purchase>
+
+    @Query("SELECT * FROM purchases ORDER BY price DESC")
+    fun getAllByPriceDescending(): List<Purchase>
 }

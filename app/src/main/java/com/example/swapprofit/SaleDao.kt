@@ -19,4 +19,13 @@ interface SaleDao {
 
     @Delete
     suspend fun delete(sale: Sale): Int  // per dare un tipo di ritorno
+
+    @Query("SELECT * FROM purchases ORDER BY dateAdded DESC")
+    fun getAllByDate(): List<Purchase>
+
+    @Query("SELECT * FROM purchases ORDER BY price ASC")
+    fun getAllByPriceAscending(): List<Purchase>
+
+    @Query("SELECT * FROM purchases ORDER BY price DESC")
+    fun getAllByPriceDescending(): List<Purchase>
 }

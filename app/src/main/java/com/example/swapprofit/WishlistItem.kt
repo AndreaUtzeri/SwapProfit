@@ -8,5 +8,6 @@ data class WishlistItem(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val item: String,
     val price: Double,
-    val link: String
+    val link: String,
+    val dateAdded: Long = System.currentTimeMillis()
 )
