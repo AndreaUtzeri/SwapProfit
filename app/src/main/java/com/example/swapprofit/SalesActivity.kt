@@ -1,5 +1,6 @@
 package com.example.swapprofit
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -21,6 +22,7 @@ class SalesActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySalesBinding
     private lateinit var database: AppDatabase
+    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,8 @@ class SalesActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         database = AppDatabase.getDatabase(this)
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.sold)
 
         setupSpinner()
 
@@ -42,6 +46,8 @@ class SalesActivity : AppCompatActivity() {
                     val sale = Sale(item = item, price = price)
                     database.saleDao().insert(Sale(0, item, price))
                     withContext(Dispatchers.Main) {
+
+                        mediaPlayer.start()
                         setupRecyclerView() // Mettendolo aggiorna appena messo un nuovo elemento.
                     }
                 }

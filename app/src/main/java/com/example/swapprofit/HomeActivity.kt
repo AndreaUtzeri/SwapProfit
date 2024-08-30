@@ -1,5 +1,6 @@
 package com.example.swapprofit
 
+import android.graphics.Color
 import android.util.Log
 import android.content.Intent
 import android.os.Bundle
@@ -59,9 +60,25 @@ class HomeActivity : AppCompatActivity() {
             Log.d("HomeActivity", "Total Sales: $totalSales, Total Purchases: $totalPurchases, Total Wishlist: $totalWishlist")
 
             withContext(Dispatchers.Main) {
-                //Log.d("HomeActivity", "Total Sales: $totalSales, Total Purchases: $totalPurchases, Total Wishlist: $totalWishlist")
-                binding.tvCounter1.text = "Counter1: €${totalSales - totalPurchases}"
-                binding.tvCounter2.text = "Counter2: €${totalSales - totalPurchases - totalWishlist}"
+                val counter1Value = totalSales - totalPurchases
+                val counter2Value = totalSales - totalPurchases - totalWishlist
+
+
+                binding.tvCounter1.text = "Profit: €$counter1Value"
+                binding.tvCounter2.text = "Future Profit: €$counter2Value"
+
+                // Cambia il colore del testo in base al valore
+                if (counter1Value < 0) {
+                    binding.tvCounter1.setTextColor(Color.RED)
+                } else {
+                    binding.tvCounter1.setTextColor(Color.GREEN)
+                }
+
+                if (counter2Value < 0) {
+                    binding.tvCounter2.setTextColor(Color.RED)
+                } else {
+                    binding.tvCounter2.setTextColor(Color.GREEN)
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.example.swapprofit
 
+import android.media.MediaPlayer
 import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +23,7 @@ class PurchasesActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPurchasesBinding
     private lateinit var database: AppDatabase
+    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +31,8 @@ class PurchasesActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         database = AppDatabase.getDatabase(this)
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.pay)
 
         setupSpinner()
 
@@ -42,6 +46,9 @@ class PurchasesActivity : AppCompatActivity() {
                 CoroutineScope(Dispatchers.IO).launch {
                     val purchase = Purchase(item = item, price = price)
                     database.purchaseDao().insert(purchase)
+
+                    mediaPlayer.start()
+
                     setupRecyclerView()
                     // Log dei dati salvati
                     logSavedData()
