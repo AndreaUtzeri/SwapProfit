@@ -64,4 +64,14 @@
         android:drawablePadding="8dp"
         android:layout_margin="16dp"
         android:layout_below="@id/btnPurchases"/>
+
+    <Button
+        android:id="@+id/btnAnalytics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Analytics"
+        android:drawableEnd="@drawable/ic_analytics"
+        android:drawablePadding="8dp"
+        android:layout_margin="16dp"
+        android:layout_below="@id/btnWishlist"/>
 </RelativeLayout>

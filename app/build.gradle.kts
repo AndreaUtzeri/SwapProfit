@@ -60,6 +60,7 @@ val roomVersion = "2.6.1"
 dependencies {
 
 
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.appcompat:appcompat:1.6.1")  //appcompat
     implementation(libs.androidx.core.ktx)

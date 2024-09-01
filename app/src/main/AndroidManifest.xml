@@ -32,6 +32,8 @@
             android:theme="@style/Theme.AppCompat.Light"/>
         <activity android:name=".WishlistActivity"
             android:theme="@style/Theme.AppCompat.Light"/>
+        <activity android:name=".AnalyticsActivity"
+            android:theme="@style/Theme.AppCompat.Light"/>
     </application>
 
 </manifest>
